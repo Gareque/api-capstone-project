@@ -1,0 +1,60 @@
+<%- include("partials/header.ejs") %>
+
+<div class="px-4 py-5 my-5 text-center">
+  <img
+    class="d-block mx-auto mb-4"
+    src="images/dungeons-dragons-5th-edition-seeklogo.png"
+    alt=""
+    width="10%"
+    height="auto"
+  />
+
+  <h1 class="display-5 fw-bold text-body-emphasis">Spell Searcher</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">Select the spell you wish to learn more about:</p>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <form action="/spells" method="POST" class="d-flex gap-2">
+        <input
+          type="text"
+          name="name"
+          class="form-control"
+          placeholder="Spell Name"
+          style="width: 150%; margin-left: -25%"
+        />
+        <input
+          type="text"
+          name="level"
+          class="form-control"
+          placeholder="Lvl"
+          style="width: 25%"
+        />
+        <br />
+        <input
+          id="post"
+          type="submit"
+          class="btn btn-primary btn-lg px-4 gap-3"
+          value="Search for Spell"
+        />
+      </form>
+    </div>
+
+    <% if (error && error.trim() !== '') { %>
+    <div class="alert alert-danger mt-3"></div>
+    <h2>Error Message: <%= error %></h2>
+    <h2>Please try again.</h2>
+    <% } else if (data) {%>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <h2 class="display-4 mt-3"><%= data.name %></h2>
+    </div>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <h2 class="display-4 mt-3 fs-4"><%= data.desc %></h2>
+    </div>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-3">
+      <% if (damageAtLevel && enteredLevel) { %>
+      <h2>Damage at level <%= enteredLevel %>: <%= damageAtLevel %></h2>
+      <% } %> <% } %>
+    </div>
+  </div>
+</div>
+
+<%- include("partials/footer.ejs") %>
